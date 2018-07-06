@@ -27,7 +27,7 @@ static void usage()
     puts("\t            Subdirectories are not processed");
 
 
-//	printf("\nVersion: %s\n", VERSION_STR);
+	printf("\nVersion: %s\n", VERSION_STR);
 }
 
 long long parse_size_spec(const char *size_spec)

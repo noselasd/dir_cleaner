@@ -25,12 +25,14 @@ else
 VARIANT_CPPFLAGS	?= -DDEBUG
 endif
 
+VERSION_STR     = $(shell git describe --tags  --abbrev=5 --always --long)
+
 COMMON_CXXFLAGS	= -Wall -Wextra -Wno-unused-parameter -ggdb -pipe -std=c++14 -Wimplicit-fallthrough=1
 COMMON_CPPFLAGS	= -D_FILE_OFFSET_BITS=64 
-CXX				?=  g++
+CXX				?= g++
 LD				=  $(CXX)
 ALL_CXXFLAGS	?= $(COMMON_CXXFLAGS) $(VARIANT_CXXFLAGS) $(CXXFLAGS)
-ALL_CPPFLAGS  	?= $(COMMON_CPPFLAGS) $(VARIANT_CPPFLAGS) $(CPPFLAGS)
+ALL_CPPFLAGS  	?= $(COMMON_CPPFLAGS) $(VARIANT_CPPFLAGS) $(CPPFLAGS) -DVERSION_STR=\"$(VERSION_STR)\"
 ALL_LIBS		?= $(LIBS)
 ALL_LDFLAGS		?= $(LDFLAGS)
 AR			 	= ar

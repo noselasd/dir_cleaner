@@ -1,4 +1,4 @@
 SOURCES = $(wildcard *.cpp)
-PROGRAM=dir_cleaner
+PROGRAM=build/dir_cleaner
 include ../make-rules.mk
 
