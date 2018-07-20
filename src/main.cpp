@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 	int c;
 	bool recursive = true;
 
-	while ((c = getopt(argc, argv, "Hns:S:N")) != -1) {
+	while ((c = getopt(argc, argv, "hns:S:N")) != -1) {
 		switch (c) {
 		case 'n':
 			dry_run = 1;
