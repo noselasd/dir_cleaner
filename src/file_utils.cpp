@@ -63,7 +63,7 @@ std::string uc_path_name(const std::string &name)
 
 static bool uc_list_directory_impl(const std::string &directory, const std::string &match_pattern, std::vector<std::string> &result, int level)
 {
-	if (level > 16) { //hardcoded for now
+	if (level > 64) { //hardcoded for now
 		return true;
 	}
 	DIR *dir = opendir(directory.c_str());
