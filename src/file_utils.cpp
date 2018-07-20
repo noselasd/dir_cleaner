@@ -61,7 +61,7 @@ std::string uc_path_name(const std::string &name)
 
 
 
-static bool uc_list_directory_impl(const std::string &directory, const std::string &match_pattern, std::vector<std::string> &result, int level)
+static bool uc_list_directory_impl(const std::string &directory, bool recursive, const std::string &match_pattern, std::vector<std::string> &result, int level)
 {
 	if (level > 64) { //hardcoded for now
 		return true;
@@ -96,7 +96,9 @@ static bool uc_list_directory_impl(const std::string &directory, const std::stri
 			}
 		}
 		if (isdir) {
-			uc_list_directory_impl(path, match_pattern, result, level + 1);
+			if (recursive) {
+				uc_list_directory_impl(path, recursive, match_pattern, result, level + 1);
+			}
 			continue;
 		}
 
@@ -112,8 +114,8 @@ static bool uc_list_directory_impl(const std::string &directory, const std::stri
 	return true;
 }
 
-bool uc_list_directory(const std::string &directory, const std::string &match_pattern, std::vector<std::string> &result)
+bool uc_list_directory(const std::string &directory, bool recursive, const std::string &match_pattern, std::vector<std::string> &result)
 
 {
-	return uc_list_directory_impl(directory, match_pattern, result, 0);
+	return uc_list_directory_impl(directory, recursive, match_pattern, result, 0);
 }

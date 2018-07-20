@@ -13,6 +13,7 @@ struct CleanOptions {
 	SortType sort_type;
 	long long total_size;
 	bool dry_run;
+	bool recursive;
 };
 
 

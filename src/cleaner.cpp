@@ -34,11 +34,11 @@ static void stat_files(const std::vector<std::string> &filenames, std::vector<Fi
 }
 
 
-static bool get_files(const std::string &dir, std::vector<FileCleanEntry> &entries)
+static bool get_files(const std::string &dir, bool recursive, std::vector<FileCleanEntry> &entries)
 {
 	std::vector<std::string> filenames;
 
-	if (!uc_list_directory(dir, "*", filenames)) {
+	if (!uc_list_directory(dir, recursive, "*", filenames)) {
 		printf("Cannot list files in %s : %s\n", dir.c_str(), strerror(errno));
 		return false;
 	}
@@ -83,7 +83,7 @@ void clean_dir(const CleanOptions &options)
 
 	std::vector<FileCleanEntry> entries;
 
-	if (!get_files(options.dir, entries)) {
+	if (!get_files(options.dir, options.recursive, entries)) {
 		return;
 	}
 

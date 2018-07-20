@@ -11,18 +11,21 @@
 static void usage()
 {
 	puts("Usage: dir_cleaner [common_options] -s size directory\n");
-	puts("Removes files in the given directory to keep total size of all files in that");
-	puts("directory at a maximum size.");
+	puts("Removes files in the given directory and its subdirectories to keep total size of all");
+	puts(" files in that directory at a maximum size.");
 	puts("\ncommon_options:");
 	puts("\t-S ctime|mtime|filename|rfilename - remove the oldest files sorted based on the file ");
-	puts("\t   ctime, mtime, filename or reverse sorted filenames");
-	puts("\t   See man 2 stat for the description of mtime and ctime. Default is mtime");
-	puts("\t-n Dry run, print files that would be removed, but do not actually remove any files");
+	puts("\t            ctime, mtime, filename or reverse sorted filenames");
+	puts("\t            See man 2 stat for the description of mtime and ctime. Default is mtime");
+	puts("\t-n          Dry run, print files that would be removed, but do not actually remove any files");
+	puts("\t-N          Non-recursive. Don't loook in sub directories for files to remove.");
+	
+
 	puts("\nmandatory arguments:");
-	puts("\t-s size - Desired size of the directory. Files will be removed from the directory until its total size");
-	puts("\t          is less than this given size. Unit is in bytes, or the size can be suffixed with");
-	puts("\t          KB, MB, GB, TB for Kilobyte, Megabyte, Gigabyte or Terabyte.");
-    puts("\t          -s 500MB means 500 Megabyte, -s 250GB means 250GB");
+	puts("\t-s size -   Desired size of the directory. Files will be removed from the directory until its total size");
+	puts("\t            is less than this given size. Unit is in bytes, or the size can be suffixed with");
+	puts("\t            KB, MB, GB, TB for Kilobyte, Megabyte, Gigabyte or Terabyte.");
+    puts("\t            -s 500MB means 500 Megabyte, -s 250GB means 250GB");
     puts("\tdirectory - Path to the directory to be cleaned. Only normal files in this directory are considered.");
     puts("\t            Subdirectories are not processed");
 
@@ -86,8 +89,9 @@ int main(int argc, char *argv[])
 	bool dry_run = false;
 	const char *sort_type = NULL;
 	int c;
+	bool recursive = true;
 
-	while ((c = getopt(argc, argv, "Hns:S:")) != -1) {
+	while ((c = getopt(argc, argv, "Hns:S:N")) != -1) {
 		switch (c) {
 		case 'n':
 			dry_run = 1;
@@ -97,6 +101,9 @@ int main(int argc, char *argv[])
 			break;
 		case 'S':
 			sort_type = optarg;
+			break;
+		case 'N':
+			recursive = false;
 			break;
 		default:
 			printf("Unknown option %c\n", c);
@@ -152,6 +159,7 @@ int main(int argc, char *argv[])
 	options.dry_run        = dry_run;
 	options.total_size     = total_size;
 	options.dir            = dir;
+	options.recursive      = recursive;
 
 	free(dir);
 

@@ -6,7 +6,7 @@
 std::string uc_path_combine(const std::string &directory, const std::string &filename);
 //list files in the given directory, fnmatch() the match pattern.
 //result is realpath() of the files. return false if an error occurs (and errno should be set)
-bool uc_list_directory(const std::string &directory, const std::string &match_pattern, std::vector<std::string> &result);
+bool uc_list_directory(const std::string &directory, bool recursive, const std::string &match_pattern, std::vector<std::string> &result);
 
 //file path without directtory
 std::string uc_path_basename(const std::string &name);
