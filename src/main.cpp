@@ -25,9 +25,9 @@ static void usage()
 	puts("\t-s size -   Desired size of the directory. Files will be removed from the directory until its total size");
 	puts("\t            is less than this given size. Unit is in bytes, or the size can be suffixed with");
 	puts("\t            KB, MB, GB, TB for Kilobyte, Megabyte, Gigabyte or Terabyte.");
-    puts("\t            -s 500MB means 500 Megabyte, -s 250GB means 250GB");
-    puts("\tdirectory - Path to the directory to be cleaned. Only normal files in this directory are considered.");
-    puts("\t            Subdirectories are not processed");
+	puts("\t            -s 500MB means 500 Megabyte, -s 250GB means 250GB");
+	puts("\tdirectory - Path to the directory to be cleaned. Only normal files in this directory are considered.");
+	puts("\t            Subdirectories are not processed");
 
 
 	printf("\nVersion: %s\n", VERSION_STR);
